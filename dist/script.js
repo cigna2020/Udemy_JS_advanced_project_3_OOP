@@ -979,6 +979,8 @@ function () {
   _createClass(Slider, [{
     key: "showSlides",
     value: function showSlides(n) {
+      var _this = this;
+
       // +1 или -1 слайд
       if (n > this.slides.length) {
         // если n больше чем количество слайдов
@@ -988,6 +990,21 @@ function () {
       if (n < 1) {
         this.slideIndex = this.slides.length;
       }
+
+      try {
+        this.hanson.style.opacity = '0'; // скрываем блок на третьем слайде
+
+        if (n === 3) {
+          this.hanson.classList.add('animated');
+          setTimeout(function () {
+            _this.hanson.style.opacity = '1';
+
+            _this.hanson.classList.add('slideInUp');
+          }, 3000);
+        } else {
+          this.hanson.classList.remove('slideInUp');
+        }
+      } catch (e) {}
 
       this.slides.forEach(function (slide) {
         slide.style.display = 'none'; // скрываем все слайды
@@ -1003,19 +1020,24 @@ function () {
   }, {
     key: "render",
     value: function render() {
-      var _this = this;
+      var _this2 = this;
+
+      try {
+        this.hanson = document.querySelector('.hanson'); // обращаемся к блоку на третем слайде, который нужно показать через 3 сек. после открытия 3-го слайда
+      } catch (e) {} // на случай ошибки, например такой блок отсутствует на странице
+
 
       this.btns.forEach(function (item) {
         item.addEventListener('click', function () {
-          _this.plusSlides(1); // 1 - только для первой страницы, там только одна кнопка
+          _this2.plusSlides(1); // 1 - только для первой страницы, там только одна кнопка
 
         });
         item.parentNode.previousElementSibling.addEventListener('click', function (e) {
           // обращаемся к лого (ссылка, вверхний левый угол) 
           e.preventDefault();
-          _this.slideIndex = 1;
+          _this2.slideIndex = 1;
 
-          _this.showSlides(_this.slideIndex);
+          _this2.showSlides(_this2.slideIndex);
         });
       });
       this.showSlides(this.slideIndex);

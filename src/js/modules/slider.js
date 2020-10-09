@@ -14,6 +14,20 @@ export default class Slider {       // можно сразу експортир�
             this.slideIndex = this.slides.length;
         }
 
+        try {
+            this.hanson.style.opacity = '0'; // скрываем блок на третьем слайде
+
+            if (n === 3) {
+                this.hanson.classList.add('animated');
+                setTimeout(() => {
+                    this.hanson.style.opacity = '1';
+                    this.hanson.classList.add('slideInUp');
+                }, 3000);
+            } else {
+                this.hanson.classList.remove('slideInUp');
+            }
+        } catch (e) { }
+
         this.slides.forEach(slide => {
             slide.style.display = 'none';   // скрываем все слайды
         });
@@ -25,6 +39,10 @@ export default class Slider {       // можно сразу експортир�
     }
 
     render() {
+        try {
+            this.hanson = document.querySelector('.hanson');        // обращаемся к блоку на третем слайде, который нужно показать через 3 сек. после открытия 3-го слайда
+        } catch (e) { } // на случай ошибки, например такой блок отсутствует на странице
+
         this.btns.forEach(item => {
             item.addEventListener('click', () => {
                 this.plusSlides(1);                 // 1 - только для первой страницы, там только одна кнопка
