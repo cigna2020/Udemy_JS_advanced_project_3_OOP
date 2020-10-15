@@ -1,8 +1,8 @@
 import Slider from './slider';
 
 export default class MainSlider extends Slider {        // наследуется (имеет доступ ко всем свойствам и методам) от Слайдера
-    constructor(page, btns) {
-        super(page, btns);      // получаем свойства
+    constructor(btns) {
+        super(btns);      // получаем свойства
     }
 
     showSlides(n) {         // +1 или -1 слайд
