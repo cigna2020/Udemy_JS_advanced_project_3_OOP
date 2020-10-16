@@ -10,21 +10,27 @@ window.addEventListener('DOMContentLoaded', () => {
     const showUpSlider = new MiniSlider({
         container: '.showup__content-slider', // class в котором размещены все слайдеры блока
         prev: '.showup__prev',
-        next: '.showup__next'
+        next: '.showup__next',
+        activeClass: 'card-active',
+        animate: true
     });
     showUpSlider.init(); // вызываем метод init с MiniSlider
 
     const modulesSlider = new MiniSlider({
         container: '.modules__content-slider', // class в котором размещены все слайдеры блока
         prev: '.modules__info-btns .slick-prev',
-        next: '.modules__info-btns .slick-next'
+        next: '.modules__info-btns .slick-next',
+        activeClass: 'card-active',
+        animate: true,
+        autoplay: true
     });
     modulesSlider.init();
 
     const feedSlider = new MiniSlider({
         container: '.feed__slider', // class в котором размещены все слайдеры блока
         prev: '.feed__slider .slick-prev',
-        next: '.feed__slider .slick-next'
+        next: '.feed__slider .slick-next',
+        activeClass: 'feed__item-active',
     });
     feedSlider.init();
 
