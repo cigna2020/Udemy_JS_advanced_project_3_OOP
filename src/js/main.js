@@ -4,6 +4,7 @@ import VideoPlayer from './modules/playVideo';
 import Difference from './modules/difference';
 import Forms from './modules/forms';
 import ShowInfo from './modules/showInfo';
+import Download from './modules/download';
 
 window.addEventListener('DOMContentLoaded', () => {
     // const slider = new Slider('.page', '.next');     // slider - экземпляр класса
@@ -44,7 +45,10 @@ window.addEventListener('DOMContentLoaded', () => {
     new VideoPlayer('.module__video-item .play', '.overlay').init();
 
     new Difference('.officerold', '.officernew', '.officer__card-item').init();   // альтернативный метод вызова, без создания переменной
+
     new Forms('.form').init();
 
     new ShowInfo('.plus__content').init();
+
+    new Download('.download').init();
 });
