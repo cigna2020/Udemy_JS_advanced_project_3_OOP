@@ -1,12 +1,14 @@
 export default class Difference {
     constructor(oldOfficer, newOfficer, items) {    // oldOfficer - первый столбик, newOfficer - второй столбик, items - селектор (class)
-        this.oldOfficer = document.querySelector(oldOfficer);
-        this.newOfficer = document.querySelector(newOfficer);
-        this.oldItems = this.oldOfficer.querySelectorAll(items);
-        this.newItems = this.newOfficer.querySelectorAll(items);
-        this.items = items;
-        this.oldCounter = 0;        // считаем сколько карточек уже показано
-        this.newCounter = 0;
+        try {
+            this.oldOfficer = document.querySelector(oldOfficer);
+            this.newOfficer = document.querySelector(newOfficer);
+            this.oldItems = this.oldOfficer.querySelectorAll(items);
+            this.newItems = this.newOfficer.querySelectorAll(items);
+            this.items = items;
+            this.oldCounter = 0;        // считаем сколько карточек уже показано
+            this.newCounter = 0;
+        } catch (e) { }
     }
 
     bindTriggers(container, items, counter) {        // вместо закоментированного ниже, оптимизация кода
@@ -61,12 +63,14 @@ export default class Difference {
     }
 
     init() {
-        // this.hideItems();
-        this.hideItems(this.oldItems);
-        this.hideItems(this.newItems);
-        // this.bindTriggers();
-        this.bindTriggers(this.oldOfficer, this.oldItems, this.oldCounter);
-        this.bindTriggers(this.newOfficer, this.newItems, this.newCounter);
+        try {
+            // this.hideItems();
+            this.hideItems(this.oldItems);
+            this.hideItems(this.newItems);
+            // this.bindTriggers();
+            this.bindTriggers(this.oldOfficer, this.oldItems, this.oldCounter);
+            this.bindTriggers(this.newOfficer, this.newItems, this.newCounter);
+        } catch (e) { }
     }
 }
 

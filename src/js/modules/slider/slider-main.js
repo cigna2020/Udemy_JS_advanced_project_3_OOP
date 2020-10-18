@@ -39,22 +39,24 @@ export default class MainSlider extends Slider {        // наследуетс�
 
     render() {
         try {
-            this.hanson = document.querySelector('.hanson');        // обращаемся к блоку на третем слайде, который нужно показать через 3 сек. после открытия 3-го слайда
-        } catch (e) { } // на случай ошибки, например такой блок отсутствует на странице
+            try {
+                this.hanson = document.querySelector('.hanson');        // обращаемся к блоку на третем слайде, который нужно показать через 3 сек. после открытия 3-го слайда
+            } catch (e) { } // на случай ошибки, например такой блок отсутствует на странице
 
-        this.btns.forEach(item => {
-            item.addEventListener('click', () => {
-                this.plusSlides(1);                 // 1 - только для первой страницы, там только одна кнопка
+            this.btns.forEach(item => {
+                item.addEventListener('click', () => {
+                    this.plusSlides(1);                 // 1 - только для первой страницы, там только одна кнопка
+                });
+
+                item.parentNode.previousElementSibling.addEventListener('click', (e) => {   // обращаемся к лого (ссылка, вверхний левый угол) 
+                    e.preventDefault();
+                    this.slideIndex = 1;
+                    this.showSlides(this.slideIndex);
+                });
             });
 
-            item.parentNode.previousElementSibling.addEventListener('click', (e) => {   // обращаемся к лого (ссылка, вверхний левый угол) 
-                e.preventDefault();
-                this.slideIndex = 1;
-                this.showSlides(this.slideIndex);
-            });
-        });
+            this.showSlides(this.slideIndex);
 
-        this.showSlides(this.slideIndex);
+        } catch (e) { }
     }
-
 }

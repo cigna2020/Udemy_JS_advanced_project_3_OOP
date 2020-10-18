@@ -9,7 +9,7 @@ export default class Slider {       // можно сразу експортир�
         autoplay
     } = {}) {       // передаем "", null или {} (дефолтные значения), что-бы небыло ошибки если не будет аргумента, container - одна из страниц, сайт многостраничный; bnts - кнопки переключения элементов
         this.container = document.querySelector(container); // page / moduleapp - также и главный блок на странице (верстке)
-        this.slides = this.container.children; //  слайды (отдельные div) внутри page / moduleapp
+        try { this.slides = this.container.children; } catch (e) { }//  слайды (отдельные div) внутри page / moduleapp, try and catch чтобы обойти ошибку на других страницах сайта
         this.btns = document.querySelectorAll(btns);
         this.prev = document.querySelector(prev);       // кнопки для мини слайдеров
         this.next = document.querySelector(next);       // кнопки для мини слайдеров
