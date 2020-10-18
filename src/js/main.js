@@ -9,6 +9,9 @@ window.addEventListener('DOMContentLoaded', () => {
     const slider = new MainSlider({ btns: '.next', container: '.page' });
     slider.render();        // вызываем метод класса, который обьеденяе все функции которые прописаны в классе
 
+    const modulePageSlider = new MainSlider({ container: '.moduleapp', btns: '.next' });     // слайдер для второй страницы сайта
+    modulePageSlider.render();
+
     const showUpSlider = new MiniSlider({
         container: '.showup__content-slider', // class в котором размещены все слайдеры блока
         prev: '.showup__prev',

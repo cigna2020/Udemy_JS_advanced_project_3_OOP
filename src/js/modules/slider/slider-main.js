@@ -4,7 +4,6 @@ export default class MainSlider extends Slider {        // наследуетс�
     constructor(btns) {
         super(btns);      // получаем свойства
     }
-
     showSlides(n) {         // +1 или -1 слайд
         if (n > this.slides.length) {   // если n больше чем количество слайдов
             this.slideIndex = 1;
@@ -37,26 +36,46 @@ export default class MainSlider extends Slider {        // наследуетс�
         this.showSlides(this.slideIndex += n);
     }
 
+    bindTriggers() {
+        this.btns.forEach(item => {
+            item.addEventListener('click', () => {
+                this.plusSlides(1);                 // 1 - только для первой страницы, там только одна кнопка
+            });
+
+            item.parentNode.previousElementSibling.addEventListener('click', (e) => {   // обращаемся к лого (ссылка, вверхний левый угол) 
+                e.preventDefault();
+                this.slideIndex = 1;
+                this.showSlides(this.slideIndex);
+            });
+        });
+
+        // переключение слайдов внутри второй страницы
+        document.querySelectorAll('.prevmodule').forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.stopPropagation();                // предотвращает всплытие события (вызов еще одного собития - click на .next)
+                e.preventDefault();
+                this.plusSlides(-1);
+            });
+        });
+
+        document.querySelectorAll('.nextmodule').forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.stopPropagation();                // предотвращает всплытие события (вызов еще одного собития - click на .next)
+                e.preventDefault();
+                this.plusSlides(1);
+            });
+        });
+
+    }
+
     render() {
-        try {
+        if (this.container) {
             try {
                 this.hanson = document.querySelector('.hanson');        // обращаемся к блоку на третем слайде, который нужно показать через 3 сек. после открытия 3-го слайда
             } catch (e) { } // на случай ошибки, например такой блок отсутствует на странице
 
-            this.btns.forEach(item => {
-                item.addEventListener('click', () => {
-                    this.plusSlides(1);                 // 1 - только для первой страницы, там только одна кнопка
-                });
-
-                item.parentNode.previousElementSibling.addEventListener('click', (e) => {   // обращаемся к лого (ссылка, вверхний левый угол) 
-                    e.preventDefault();
-                    this.slideIndex = 1;
-                    this.showSlides(this.slideIndex);
-                });
-            });
-
             this.showSlides(this.slideIndex);
-
-        } catch (e) { }
+            this.bindTriggers();
+        }
     }
 }
